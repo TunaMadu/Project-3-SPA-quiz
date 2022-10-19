@@ -35,7 +35,7 @@ main {
   position: relative;
 }
 .home-btn {
-  top: -5.3rem;
+  top: -5rem;
   margin-left: 2rem;
   position: absolute;
   color: var(--darker-white);
@@ -130,4 +130,8 @@ main {
 
 .answer .btn {
   color: var(--darkest-primary);
+}
+
+.alert {
+  text-align: center;
 }
