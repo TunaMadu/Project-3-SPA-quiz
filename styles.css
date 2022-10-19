@@ -1,0 +1,91 @@
+/* using variables to organize css colors */
+:root {
+  --primary-gray: #212121;
+  --lighter-gray: #4d4d4d;
+  --lightest-gray: #909090;
+  --lightest-possible-gray: #bcbcbc;
+
+  --primary-color: #6d9886;
+  --darkest-primary: #2c3d36;
+  --darker-primary: #4c6a5e;
+  --lighter-primary: #99b7aa;
+
+  --primary-accent: #d9cab3;
+
+  --white-color: #f6f6f6;
+
+  --main-shadow-color: rgba(144, 144, 144, 0.5);
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--primary-gray);
+  background-color: var(--white-color);
+}
+/*  */
+/* styling header */
+/*  */
+.heading {
+  font-size: 6.4rem;
+  font-weight: 700;
+  color: var(--lightest-gray);
+  line-height: 1.8;
+  letter-spacing: -0.8px;
+}
+.navbar {
+  background-color: var(--primary-gray);
+  margin-bottom: 5rem;
+  box-shadow: 0 5px 6px 1px var(--main-shadow-color);
+}
+/*  */
+/* styling the question */
+/*  */
+.question-text {
+  background-color: var(--darkest-primary);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--lighter-primary);
+  padding: 5rem;
+  margin-top: 7rem;
+}
+
+.question-answers {
+  padding: 5rem;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: var(--lighter-primary);
+}
+.answer-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.answer:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.answer .btn {
+  display: inline-block;
+  font-size: 2.4rem;
+  font-weight: 500;
+  padding: 0 2rem;
+  color: var(--darkest-primary);
+}
+
+.btn:hover {
+  background-color: rgba(109, 152, 134, 0.4);
+}
+.btn:active {
+  background-color: rgba(44, 61, 54, 0.2);
+}
+.btn:focus {
+  box-shadow: 0 0 2px 3px var(--main-shadow-color);
+}
