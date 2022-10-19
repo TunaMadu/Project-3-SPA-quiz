@@ -13,6 +13,7 @@
   --primary-accent: #d9cab3;
 
   --white-color: #f6f6f6;
+  --darker-white: #7b7b7b;
 
   --main-shadow-color: rgba(144, 144, 144, 0.5);
 }
@@ -28,6 +29,27 @@ body {
   background-color: var(--white-color);
 }
 /*  */
+/* styling a home button */
+/*  */
+main {
+  position: relative;
+}
+.home-btn {
+  top: -5.3rem;
+  margin-left: 2rem;
+  position: absolute;
+  color: var(--darker-white);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.home-btn:hover {
+  color: var(--darker-primary);
+}
+.home-btn:active {
+  opacity: 0.5;
+}
+
+/*  */
 /* styling header */
 /*  */
 .heading {
@@ -42,6 +64,23 @@ body {
   margin-bottom: 5rem;
   box-shadow: 0 5px 6px 1px var(--main-shadow-color);
 }
+/*  */
+/* styling the quiz intial menu */
+/*  */
+.quiz-option-section {
+  padding: 20vh 0;
+}
+.quiz-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+.quiz-options .btn {
+  padding: 2rem;
+  color: var(--primary-gray);
+}
+
 /*  */
 /* styling the question */
 /*  */
@@ -72,12 +111,11 @@ body {
   margin-bottom: 2rem;
 }
 
-.answer .btn {
+.btn {
   display: inline-block;
   font-size: 2.4rem;
   font-weight: 500;
   padding: 0 2rem;
-  color: var(--darkest-primary);
 }
 
 .btn:hover {
@@ -88,4 +126,8 @@ body {
 }
 .btn:focus {
   box-shadow: 0 0 2px 3px var(--main-shadow-color);
+}
+
+.answer .btn {
+  color: var(--darkest-primary);
 }
