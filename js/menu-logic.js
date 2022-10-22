@@ -1,66 +1,47 @@
 "use strict";
 
-function createQuizMenu() {
-  console.log("yo");
-  document.addEventListener("DOMContentLoaded", () => {
-    const button1 = document.createElement("button");
-    const button2 = document.createElement("button");
+const quizMenu = document.querySelector(".quiz-option-section");
+const quizButtons = document.querySelectorAll(".option-button");
 
-    button1.classList.add("option-button", "btn");
-    button2.classList.add("option-button", "btn");
+const homeBtn = document.querySelector(".home-btn");
 
-    button1.innerText = "Take a multiple choice quiz.";
-    button2.innerText = "Take a true or false quiz.";
+const question = document.querySelector(".quiz-section");
 
-    const buttonContainer = document.querySelector(".quiz-options");
-
-    buttonContainer.appendChild(button1);
-    buttonContainer.appendChild(button2);
-
-    mainMenuLogic(button1);
-    mainMenuLogic(button2);
-  });
-}
-
-function mainMenuLogic(button) {
-  button.addEventListener("click", () => {
-    if (!document.querySelector(".home-btn")) {
-      addHomeNavigation();
-    }
-  });
-}
-function addHomeNavigation() {
-  const mainContainer = document.querySelector("main");
-
-  let homeBtn = document.createElement("span");
-  homeBtn.classList.add("home-btn");
-  homeBtn.innerText = "Home";
-
-  mainContainer.appendChild(homeBtn);
-
-  removeQuizMenu();
-  homeMenuLogic();
-}
-
-function removeQuizMenu() {
-  const buttonContainer = document.querySelector(".quiz-options");
-  buttonContainer.innerHTML = "";
-}
-
-function homeMenuLogic() {
-  let homeButton;
-  if (document.querySelector(".home-btn")) {
-    homeButton = document.querySelector(".home-btn");
-    homeButton.addEventListener("click", () => {
-      let mainContainer = document.querySelector("main");
-      mainContainer.removeChild(homeButton);
-    });
+const removeQuizMenu = function () {
+  if (homeBtn.classList.contains("hidden")) {
+    quizMenu.classList.add("hidden");
+    homeBtn.classList.remove("hidden");
   }
-}
+};
+const removeHomeMenu = function () {
+  if (!homeBtn.classList.contains("hidden")) {
+    homeBtn.classList.add("hidden");
+    quizMenu.classList.remove("hidden");
+  }
+};
 
-function intialize() {
-  createQuizMenu();
-}
+const removeQuestion = function () {
+  if (!question.classList.contains("hidden")) {
+    question.classList.add("hidden");
+  }
+};
 
-intialize();
-// homeMenuLogic();
+const showQuestion = function () {
+  if (question.classList.contains("hidden"))
+    question.classList.remove("hidden");
+};
+
+const intializeQuestions = function () {
+  removeQuizMenu();
+  showQuestion();
+};
+
+const resetDisplay = function () {
+  removeHomeMenu();
+  removeQuestion();
+};
+
+for (let i = 0; i < quizButtons.length; i++)
+  quizButtons[i].addEventListener("click", intializeQuestions);
+
+homeBtn.addEventListener("click", resetDisplay);
