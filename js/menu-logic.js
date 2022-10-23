@@ -7,23 +7,22 @@ const homeBtn = document.querySelector(".home-btn");
 
 const question = document.querySelector(".quiz-section");
 
+const removeAndAddElement = function (hide, show) {
+  hide.classList.add("hidden");
+  show.classList.remove("hidden");
+};
+
 const removeQuizMenu = function () {
-  if (homeBtn.classList.contains("hidden")) {
-    quizMenu.classList.add("hidden");
-    homeBtn.classList.remove("hidden");
-  }
+  if (homeBtn.classList.contains("hidden"))
+    removeAndAddElement(quizMenu, homeBtn);
 };
 const removeHomeMenu = function () {
-  if (!homeBtn.classList.contains("hidden")) {
-    homeBtn.classList.add("hidden");
-    quizMenu.classList.remove("hidden");
-  }
+  if (!homeBtn.classList.contains("hidden"))
+    removeAndAddElement(homeBtn, quizMenu);
 };
 
 const removeQuestion = function () {
-  if (!question.classList.contains("hidden")) {
-    question.classList.add("hidden");
-  }
+  if (!question.classList.contains("hidden")) question.classList.add("hidden");
 };
 
 const showQuestion = function () {
