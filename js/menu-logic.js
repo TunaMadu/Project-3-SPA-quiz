@@ -5,7 +5,7 @@ const quizButtons = document.querySelectorAll(".option-button");
 
 const homeBtn = document.querySelector(".home-btn");
 
-const question = document.querySelector(".quiz-section");
+const questionSection = document.querySelector(".quiz-section");
 
 const removeAndAddElement = function (hide, show) {
   hide.classList.add("hidden");
@@ -22,12 +22,13 @@ const removeHomeMenu = function () {
 };
 
 const removeQuestion = function () {
-  if (!question.classList.contains("hidden")) question.classList.add("hidden");
+  if (!questionSection.classList.contains("hidden"))
+    questionSection.classList.add("hidden");
 };
 
 const showQuestion = function () {
-  if (question.classList.contains("hidden"))
-    question.classList.remove("hidden");
+  if (questionSection.classList.contains("hidden"))
+    questionSection.classList.remove("hidden");
 };
 
 const intializeQuestions = function () {

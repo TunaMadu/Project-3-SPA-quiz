@@ -25,15 +25,19 @@
       <!-- going to set up a way for the person to select what test they want to take -->
       <section class="quiz-option-section container mx-auto">
         <div class="quiz-options container">
-          <button class="option-button btn">Take a multiple choice quiz</button>
+          <button id="MC-quiz" class="option-button btn">
+            Take a multiple choice quiz
+          </button>
 
-          <button class="option-button btn">Take a true or false quiz</button>
+          <button id="TF-quiz" class="option-button btn">
+            Take a true or false quiz
+          </button>
         </div>
       </section>
 
       <!-- this is the layout for a generic question -->
       <section class="quiz-section mx-auto container hidden">
-        <div class="question container">
+        <!-- <div class="question container">
           <div class="question-text">
             <p>There will be a programming question here.</p>
           </div>
@@ -53,21 +57,36 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </section>
 
+      <!-- template -->
+      <script id="question-template" type="text/x-handlebars-template">
+        <div class="question container">
+          <div class="question-text">
+            <p>{{question}}</p>
+          </div>
+          <div class="question-answers container">
+            <ul class="answer-list list-unstyled">
+              {{#each answers}}
+                <li class="answer">
+                  <button class="btn">{{this}}</button>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </script>
       <!-- results -->
       <!-- <div class="container my-5">
         <div class="alert alert-success">Great Job!</div>
         <div class="alert alert-danger">Damn</div>
       </div> -->
     </main>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-      integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <script src="/handlebars-v4.7.7.js"></script>
+
     <script src="/js/menu-logic.js"></script>
+    <script src="/js/MC-question-logic.js"></script>
+    <script src="/js/TF-question-logic.js"></script>
   </body>
 </html>
