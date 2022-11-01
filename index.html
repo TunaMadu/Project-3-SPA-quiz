@@ -70,7 +70,7 @@
             <ul class="answer-list list-unstyled">
               {{#each answers}}
                 <li class="answer">
-                  <button class="btn">{{this}}</button>
+                  <button class="btn answer-button">{{this}}</button>
                 </li>
               {{/each}}
             </ul>
@@ -78,10 +78,10 @@
         </div>
       </script>
       <!-- results -->
-      <!-- <div class="container my-5">
-        <div class="alert alert-success">Great Job!</div>
-        <div class="alert alert-danger">Damn</div>
-      </div> -->
+      <div class="container my-5">
+        <div class="alert alert-success hidden">Great Job!</div>
+        <div class="alert alert-danger hidden">Damn</div>
+      </div>
     </main>
     <script src="/handlebars-v4.7.7.js"></script>
 
