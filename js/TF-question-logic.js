@@ -123,7 +123,7 @@ let showResultTF = () => {
 };
 let resetStateTF = () => {
   document.querySelector(".quiz-section").innerHTML = "";
-  generatedNumberList.clear();
-  correctAnswered = 0;
-  questionsAsked = 0;
+  generatedNumberListTF.clear();
+  correcetAnsweredTF = 0;
+  questionsAskedTF = 0;
 };
