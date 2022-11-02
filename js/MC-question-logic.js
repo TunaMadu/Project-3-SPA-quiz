@@ -1,7 +1,11 @@
 "use strict";
 
+const APIREF =
+  "https://my-json-server.typicode.com/TunaMadu/quiz-questions/mc-questions";
+
 const NUMBEROFQUESTIONS = 5;
 let correctAnswered = 0;
+let questionsAsked = 0;
 let randomQuestion;
 let generatedNumberList = new Map();
 
@@ -15,15 +19,11 @@ let makeQuestion = () => {
     setRandomQuestion(data);
     createHTML(randomQuestion);
     answerLogic(randomQuestion);
-    console.log(generatedNumberList);
-    console.log(correctAnswered);
   });
 };
 
 let getRandomQuestion = async () => {
-  let response = await fetch(
-    "https://my-json-server.typicode.com/TunaMadu/quiz-questions/mc-questions"
-  );
+  let response = await fetch(APIREF);
   return await response.json();
 };
 
@@ -57,20 +57,6 @@ let createHTML = (randomQuestion) => {
   questionContainer.innerHTML = generatedHTML;
 };
 
-var home = document.querySelector(".home-btn");
-
-//resets the status of the page.
-
-home.addEventListener("click", () => {
-  let question = document.querySelector(".quiz-section");
-  question.innerHTML = "";
-  generatedNumberList.clear();
-  correctAnswered = 0;
-  console.log(correctAnswered);
-
-  console.log(generatedNumberList);
-});
-
 let answerLogic = (question) => {
   let mcQuestionAnswers = document.querySelectorAll(".answer-button");
 
@@ -80,8 +66,10 @@ let answerLogic = (question) => {
     choice.addEventListener("click", () => {
       if (choice.innerText === question.answer) {
         correctAnswer();
+        setTimeout(() => generateNewQuestion(), 900);
       } else {
         inCorrectAnswer();
+        setTimeout(() => generateNewQuestion(), 900);
       }
     });
   }
@@ -90,19 +78,53 @@ let answerLogic = (question) => {
 let correctAnswer = function () {
   let showSuccess = document.querySelector(".alert-success");
   showSuccess.classList.remove("hidden");
-
-  sleepMessage(showSuccess);
+  correctAnswered++;
+  sleepAlert(showSuccess);
 };
 
 let inCorrectAnswer = function () {
   let showIncorrect = document.querySelector(".alert-danger");
   showIncorrect.classList.remove("hidden");
 
-  sleepMessage(showIncorrect);
+  sleepAlert(showIncorrect);
 };
 
-let sleepMessage = (answerStatus) => {
+let sleepAlert = (answerStatus) => {
   setTimeout(() => {
     answerStatus.classList.add("hidden");
   }, 1000);
+};
+
+let generateNewQuestion = () => {
+  if (questionsAsked < NUMBEROFQUESTIONS - 1) {
+    //make a new question from the top!
+    makeQuestion();
+    console.log(questionsAsked);
+
+    questionsAsked++;
+  } else {
+    showResult();
+  }
+};
+//we have to work on this when we get back
+let showResult = () => {
+  switch (correctAnswered) {
+    case 0:
+      alert(`Not a single one???`);
+      break;
+    default:
+      console.log(questionsAsked);
+
+      alert(`Your score: ${correctAnswered}/${NUMBEROFQUESTIONS}`);
+  }
+
+  resetState();
+  resetDisplay();
+};
+
+let resetState = () => {
+  document.querySelector(".quiz-section").innerHTML = "";
+  generatedNumberList.clear();
+  correctAnswered = 0;
+  questionsAsked = 0;
 };
