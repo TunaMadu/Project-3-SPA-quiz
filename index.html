@@ -20,9 +20,8 @@
       </nav>
     </header>
     <main>
-      <!-- a home naviagition -->
+      <!-- home navigation -->
       <span class="home-btn hidden">Home</span>
-      <!-- going to set up a way for the person to select what test they want to take -->
       <section class="quiz-option-section container mx-auto">
         <div class="quiz-options container">
           <button id="MC-quiz" class="option-button btn">
@@ -35,30 +34,8 @@
         </div>
       </section>
 
-      <!-- this is the layout for a generic question -->
-      <section class="quiz-section mx-auto container hidden">
-        <!-- <div class="question container">
-          <div class="question-text">
-            <p>There will be a programming question here.</p>
-          </div>
-          <div class="question-answers container">
-            <ul class="answer-list list-unstyled">
-              <li class="answer">
-                <button class="btn">This is answer 1</button>
-              </li>
-              <li class="answer">
-                <button class="btn">This is answer 2</button>
-              </li>
-              <li class="answer">
-                <button class="btn">This is answer 3</button>
-              </li>
-              <li class="answer">
-                <button class="btn">This is answer 4</button>
-              </li>
-            </ul>
-          </div>
-        </div> -->
-      </section>
+      <!-- questions go in here -->
+      <section class="quiz-section mx-auto container hidden"></section>
 
       <!-- template -->
       <script id="question-template" type="text/x-handlebars-template">
@@ -77,10 +54,10 @@
           </div>
         </div>
       </script>
-      <!-- results -->
+      <!-- input feeback -->
       <div class="container my-5">
-        <div class="alert alert-success hidden">Great Job!</div>
-        <div class="alert alert-danger hidden">Damn</div>
+        <div class="alert alert-success hidden">Nice!</div>
+        <div class="alert alert-danger hidden">Incorrecto</div>
       </div>
     </main>
     <script src="/handlebars-v4.7.7.js"></script>
