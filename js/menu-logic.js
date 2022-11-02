@@ -39,6 +39,7 @@ const intializeQuestions = function () {
 const resetDisplay = function () {
   removeHomeMenu();
   removeQuestion();
+  resetState();
 };
 
 for (let i = 0; i < quizButtons.length; i++)
