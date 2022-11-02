@@ -118,6 +118,12 @@ let showResultTF = () => {
       alert(`Your score: ${correcetAnsweredTF}/${NUMBEROFQUESTIONSASKED}`);
   }
 
-  resetState();
+  resetStateTF();
   resetDisplay();
+};
+let resetStateTF = () => {
+  document.querySelector(".quiz-section").innerHTML = "";
+  generatedNumberList.clear();
+  correctAnswered = 0;
+  questionsAsked = 0;
 };
