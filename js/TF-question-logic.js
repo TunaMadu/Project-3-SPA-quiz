@@ -1,27 +1,51 @@
 "use strict";
 
+const APIREFERENCE =
+  "https://my-json-server.typicode.com/TunaMadu/quiz-questions/tf-questions";
+
+const NUMBEROFQUESTIONSASKED = 5;
+let correcetAnsweredTF = 0;
+let questionsAskedTF = 0;
 let randomQuestionTF;
 let generatedNumberListTF = new Map();
 
+let tfButton = document.querySelector("#TF-quiz");
 let generateNumberTF = (length) => Math.trunc(Math.random() * length);
 
-let tfButton = document.querySelector("#TF-quiz");
+tfButton.addEventListener("click", () => makeQuestionTF());
 
-let getrandomQuestionTF = async () => {
-  let response = await fetch(
-    "https://my-json-server.typicode.com/TunaMadu/quiz-questions/tf-questions"
-  );
+let makeQuestionTF = () => {
+  getRandomQuestionTF().then((data) => {
+    setRandomQuestionTF(data);
+    createHTMLTF(randomQuestionTF);
+    answerLogicTF(randomQuestionTF);
+  });
+};
+
+let getRandomQuestionTF = async () => {
+  let response = await fetch(APIREFERENCE);
   return await response.json();
 };
 
-let setrandomQuestionTF = (data) => {
+//set a new question
+let setRandomQuestionTF = (data) => {
+  let randomNum = generateNewNumberTF(data);
+  setQuestionsTF(randomNum, data);
+};
+
+//if the question has already been asked then will continue to generate a new number.
+let generateNewNumberTF = (data) => {
   let generatedNumber = generateNumberTF(data.length);
-  while (generatedNumberList.has(data)) {
-    generateNumber = generateNumber(data.length);
-  }
-  generatedNumberListTF.set(generatedNumber);
-  randomQuestionTF = data[generatedNumber];
-  console.log(randomQuestionTF);
+
+  while (generatedNumberListTF.has(generatedNumber))
+    generatedNumber = generateNumberTF(data.length);
+
+  return generatedNumber;
+};
+
+let setQuestionsTF = (num, data) => {
+  generatedNumberListTF.set(num);
+  randomQuestionTF = data[num];
 };
 
 let createHTMLTF = (randomQuestionTF) => {
@@ -33,18 +57,67 @@ let createHTMLTF = (randomQuestionTF) => {
   questionContainer.innerHTML = generatedHTML;
 };
 
-tfButton.addEventListener("click", () => {
-  getrandomQuestionTF().then((data) => {
-    setrandomQuestionTF(data);
-    createHTMLTF(randomQuestionTF);
-    console.log(generatedNumberListTF);
-  });
-});
-var home = document.querySelector(".home-btn");
+let answerLogicTF = (question) => {
+  let mcQuestionAnswers = document.querySelectorAll(".answer-button");
 
-home.addEventListener("click", () => {
-  let question = document.querySelector(".quiz-section");
-  question.innerHTML = "";
-  generatedNumberListTF.clear();
-  console.log(generatedNumberListTF);
-});
+  for (let i = 0; i < mcQuestionAnswers.length; i++) {
+    let choice = mcQuestionAnswers[i];
+
+    choice.addEventListener("click", () => {
+      if (choice.innerText === question.answer) {
+        correctAnswerTF();
+        setTimeout(() => generateNewQuestionTF(), 900);
+      } else {
+        inCorrectAnswerTF();
+        setTimeout(() => generateNewQuestionTF(), 900);
+      }
+    });
+  }
+};
+
+let correctAnswerTF = function () {
+  let showSuccess = document.querySelector(".alert-success");
+  showSuccess.classList.remove("hidden");
+  correcetAnsweredTF++;
+  sleepAlertTF(showSuccess);
+};
+
+let inCorrectAnswerTF = function () {
+  let showIncorrect = document.querySelector(".alert-danger");
+  showIncorrect.classList.remove("hidden");
+
+  sleepAlertTF(showIncorrect);
+};
+
+let sleepAlertTF = (answerStatus) => {
+  setTimeout(() => {
+    answerStatus.classList.add("hidden");
+  }, 1000);
+};
+
+let generateNewQuestionTF = () => {
+  if (questionsAskedTF < NUMBEROFQUESTIONSASKED - 1) {
+    //make a new question from the top!
+    makeQuestionTF();
+    console.log(questionsAskedTF);
+
+    questionsAskedTF++;
+  } else {
+    showResultTF();
+  }
+};
+//we have to work on this when we get back
+let showResultTF = () => {
+  switch (correcetAnsweredTF) {
+    case 0:
+      alert(`Not a single one???`);
+      break;
+    default:
+      console.log(questionsAskedTF);
+
+      alert(`Your score: ${correcetAnsweredTF}/${NUMBEROFQUESTIONSASKED}`);
+  }
+
+  resetState();
+  resetDisplay();
+};
